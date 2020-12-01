@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 velocity;
     public SpriteRenderer sprite;
+    public float gravityScale;
 
     void Start() {
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -25,11 +26,24 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape)) {
             Debug.Log("Quittng");
             Application.Quit();
-		}
+        } else if (Input.GetKey(KeyCode.LeftArrow)) {
+            GlobalVars.Instance.gravityDir = new Vector2(-1.0f, 0.0f);
+            Debug.Log("Gravity right");
+        } else if (Input.GetKey(KeyCode.RightArrow)) {
+            GlobalVars.Instance.gravityDir = new Vector2(1.0f, 0.0f);
+            Debug.Log("Gravity left");
+        } else if (Input.GetKey(KeyCode.UpArrow)) {
+            GlobalVars.Instance.gravityDir = new Vector2(0.0f, 1.0f);
+            Debug.Log("Gravity up");
+        } else if (Input.GetKey(KeyCode.DownArrow)) {
+            GlobalVars.Instance.gravityDir = new Vector2(0.0f, -1.0f);
+            Debug.Log("Gravity down");
+        }
     }
 
     private void FixedUpdate()
     {
+        rb.AddForce(gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
         rb.MovePosition(rb.position + velocity * GlobalVars.Instance.playerSpeed * Time.fixedDeltaTime);
     }
 
