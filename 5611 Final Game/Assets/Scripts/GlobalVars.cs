@@ -15,6 +15,7 @@ public class GlobalVars : MonoBehaviour
 
     //global vars here
     public Vector2 gravityDir = new Vector2(0.0f, -1.0f);
+    public float gravityScale = 0f;
 
     public int playerHealth = 100;
     public float playerSpeed = 7f;

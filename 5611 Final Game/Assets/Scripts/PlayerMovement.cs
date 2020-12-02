@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 velocity;
     public SpriteRenderer sprite;
-    public float gravityScale;
 
     void Start() {
         sprite = GetComponentInChildren<SpriteRenderer>();
@@ -43,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
+        rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
         rb.MovePosition(rb.position + velocity * GlobalVars.Instance.playerSpeed * Time.fixedDeltaTime);
     }
 

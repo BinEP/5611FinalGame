@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
+    public Rigidbody2D rb;
+
     void Update()
     {
         
@@ -16,5 +18,11 @@ public class CoinScript : MonoBehaviour
             GlobalVars.Instance.collectCoin();
             gameObject.SetActive(false);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
     }
 }
