@@ -36,14 +36,8 @@ public class GlobalVars : MonoBehaviour
 
     public Text healthText;
     public Text coinText;
-
-    public int startingCards = 3;
-
-    public GameObject card1;
+    
     public GameObject playerArea;
-    public GameObject discardPile;
-    public int numCards;
-    List<GameObject> cards = new List<GameObject>();
 
     public float getVisibilityModifier()
     {
@@ -70,8 +64,6 @@ public class GlobalVars : MonoBehaviour
         {
             _instance = this;
         }
-
-        cards.Add(card1);
        
     }
 
@@ -83,79 +75,10 @@ public class GlobalVars : MonoBehaviour
         }
 	}
 
-    public void applyModifiers(CardDiskData data) {
-        playerHealth = Mathf.Min(120, playerHealth + data.addHealth);
-        playerSpeed += data.speedModifier;
-        for (int i = 0; i < data.addCoins; i++) {
-            collectCoin();
-		}
-        playerStealth = Mathf.Min(0.75f, playerStealth + data.stealthModifier);
-        Debug.Log("Applied Modifiers");
-    }
-
     public void collectCoin() {
-        if (++totalCoins % coinsPerDraw == 0) drawCard();
         SoundManagerScript.playSound("coin");
 
     }
 
-    public void drawCard() {
-        if (Deck.Instance.cardsLeft() < 1) return;
-        
-
-        for (int i = 0; i < numCards; i++) {
-            GameObject playerCard = Instantiate(cards[UnityEngine.Random.Range(0, cards.Count)], new Vector3(0, 0, 0), Quaternion.identity);
-            Selected script = playerCard.GetComponent<Selected>();
-            script.setDiscardPile(discardPile);
-            CardDisplay cardProps = playerCard.GetComponent<CardDisplay>();
-            cardProps.updateProperties(Deck.Instance.getCard());
-
-            playerCard.transform.SetParent(playerArea.transform, false);
-        }
-        SoundManagerScript.playSound("draw");
-    }
-}
-
-
-[Serializable]
-public class CardDiskData {
-
-    public int addHealth;
-    public int addCoins;
-    public int speedModifier;
-    public int stealthModifier;
-
-
-    //Only from a file
-    private CardDiskData() { }
-
-    public static CardDiskData GetFromString(string config) {
-        return JsonUtility.FromJson<CardDiskData>(config);
-    }
-
-    public static CardDiskData GetFromFile(string path) {
-        //try {
-
-            string config = LoadResourceTextfile(path);
-            return GetFromString(config);
-        //} catch (Exception e) {
-        //    Debug.LogException(e);
-        //    Debug.Log("ERROR:" + e);
-        //    return null;
-        //}
-    }
-
-    public static string LoadResourceTextfile(string path) {
-        TextAsset targetFile = Resources.Load<TextAsset>(path);
-        return targetFile.text;
-    }
-
-    public string ToString() {
-        return "Add Health: " + addHealth + "\tAdd Coins: " + addCoins + "\tSpeed Modifier: " + speedModifier + "\tStealth Modifier: " + stealthModifier;
-
-    }
-
-
-     
-
+    
 }
