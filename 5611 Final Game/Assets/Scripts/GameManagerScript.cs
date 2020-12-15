@@ -58,7 +58,6 @@ public class GameManagerScript : MonoBehaviour
         Debug.Log("restart");
         GameObject button = GameObject.FindGameObjectsWithTag("DrawButton")[0];
         Debug.Log("restart 2");
-        button.GetComponent<drawCards>().Setup();
         Debug.Log("restart 3");
     }
 

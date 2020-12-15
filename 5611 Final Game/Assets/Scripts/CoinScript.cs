@@ -22,7 +22,7 @@ public class CoinScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
-        rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
+        //rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
+        //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
     }
 }
