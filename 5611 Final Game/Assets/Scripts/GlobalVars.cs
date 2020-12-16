@@ -31,6 +31,7 @@ public class GlobalVars : MonoBehaviour
     public float enemyAttackRange = 4f;
     public int enemyAttackValue = 50;
     public int enemyStartingHealth = 20;
+    public int currentDimension = 1;
 
     public EquipabbleItem equipabbleItem = null;
 

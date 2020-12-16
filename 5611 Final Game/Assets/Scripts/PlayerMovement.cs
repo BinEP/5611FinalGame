@@ -27,16 +27,16 @@ public class PlayerMovement : MonoBehaviour
             Application.Quit();
         } else if (Input.GetKey(KeyCode.LeftArrow)) {
             GlobalVars.Instance.gravityDir = new Vector2(-1.0f, 0.0f);
-            Debug.Log("Gravity right");
+            //Debug.Log("Gravity right");
         } else if (Input.GetKey(KeyCode.RightArrow)) {
             GlobalVars.Instance.gravityDir = new Vector2(1.0f, 0.0f);
-            Debug.Log("Gravity left");
+           // Debug.Log("Gravity left");
         } else if (Input.GetKey(KeyCode.UpArrow)) {
             GlobalVars.Instance.gravityDir = new Vector2(0.0f, 1.0f);
-            Debug.Log("Gravity up");
+            //Debug.Log("Gravity up");
         } else if (Input.GetKey(KeyCode.DownArrow)) {
             GlobalVars.Instance.gravityDir = new Vector2(0.0f, -1.0f);
-            Debug.Log("Gravity down");
+           // Debug.Log("Gravity down");
         }
     }
 
