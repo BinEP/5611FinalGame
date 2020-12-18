@@ -32,13 +32,10 @@ public class GlobalVars : MonoBehaviour
     public int enemyAttackValue = 50;
     public int enemyStartingHealth = 20;
 
-    public int numDimensions = 5;
-    public int currentDimensionIter = 1;
-    public GameObject Dimension1;
-    public GameObject Dimension2;
-    public GameObject Dimension3;
-    public GameObject Dimension4;
-    public GameObject Dimension5;
+    public int numDimensions = 0;
+    public int currentDimensionIter = 0;
+    public GameObject Dimensions;
+    private DimensionHandler currentDim = null;
 
     public EquipabbleItem equipabbleItem = null;
 
@@ -88,5 +85,40 @@ public class GlobalVars : MonoBehaviour
         totalCoins++;
     }
 
-    
+    public void switchDim(int newDim)
+    {
+        Debug.Log("Switching to dimension " + newDim);
+        if (newDim > numDimensions || newDim < 1)
+        {
+            Debug.Log("You just tried to switch to an invalid dimension?!? What are you thinking?!?");
+        }
+        else
+        {
+            currentDimensionIter = newDim;
+
+            if (numDimensions > 0)
+            {
+                DimensionHandler[] dims = Dimensions.GetComponentsInChildren<DimensionHandler>();
+                foreach (DimensionHandler myDim in dims)
+                {
+                    if (myDim.Dim == newDim)
+                    {
+                        myDim.gameObject.SetActive(true);
+                        currentDim = myDim;
+                        //GameObject dimGO = myDim.GetComponentInParent<GameObject>();
+                    }
+                    else
+                    {
+                        myDim.gameObject.SetActive(false);
+                        //GameObject dimGO = myDim.GetComponentInParent<GameObject>();
+                    }
+                }
+            }
+        }
+    }
+
+    public DimensionHandler getCurrentDim()
+    {
+        return currentDim;
+    }
 }

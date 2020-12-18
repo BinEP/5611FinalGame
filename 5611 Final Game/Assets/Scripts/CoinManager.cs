@@ -36,67 +36,40 @@ public class CoinManager : MonoBehaviour
 
     private bool isLocValid(Vector3 pos)
     {
-        GameObject currentDim = GlobalVars.Instance.Dimension1;
-        switch (GlobalVars.Instance.currentDimensionIter)
+        if (GlobalVars.Instance.getCurrentDim() != null)
         {
-            case 2:
-                currentDim = GlobalVars.Instance.Dimension2;
-                break;
-            case 3:
-                currentDim = GlobalVars.Instance.Dimension3;
-                break;
-            case 4:
-                currentDim = GlobalVars.Instance.Dimension4;
-                break;
-            case 5:
-                currentDim = GlobalVars.Instance.Dimension5;
-                break;
-            default:
-                break;
-        }
-
-
-        Collider2D[] colliders = currentDim.GetComponentsInChildren<Collider2D>();
-        foreach (Collider2D c in colliders)
+            Collider2D[] colliders = GlobalVars.Instance.getCurrentDim().GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D c in colliders)
+            {
+                if (pos.x < -10000000.0f || c.OverlapPoint(new Vector2(pos.x, pos.y))) return false;
+            }
+        } else
         {
-            if (pos.x < -10000000.0f || c.OverlapPoint(new Vector2(pos.x, pos.y))) return false;
+            Debug.Log("WARNING: we don't have a current dimension!!!");
         }
+            return true;
         
-        return true;
     }
 
     private Vector3 newLoc()
     {
         Vector3 minPos = new Vector3(0.0f, 0.0f);
         Vector3 maxPos = new Vector3(0.0f, 0.0f);
-        GameObject currentDim = GlobalVars.Instance.Dimension1;
-        switch (GlobalVars.Instance.currentDimensionIter)
-        {
-            case 2:
-                currentDim = GlobalVars.Instance.Dimension2;
-                break;
-            case 3:
-                currentDim = GlobalVars.Instance.Dimension3;
-                break;
-            case 4:
-                currentDim = GlobalVars.Instance.Dimension4;
-                break;
-            case 5:
-                currentDim = GlobalVars.Instance.Dimension5;
-                break;
-            default:
-                break;
-        }
 
-
-        Collider2D[] colliders = currentDim.GetComponentsInChildren<Collider2D>();
-        foreach (Collider2D c in colliders)
+        if (GlobalVars.Instance.getCurrentDim() != null)
         {
-            minPos = c.bounds.min;
-            maxPos = c.bounds.max;
-            break;
+            Collider2D[] colliders = GlobalVars.Instance.getCurrentDim().GetComponentsInChildren<Collider2D>();
+            foreach (Collider2D c in colliders)
+            {
+                minPos = c.bounds.min;
+                maxPos = c.bounds.max;
+                break;
+            }
         }
-        
+        else
+        {
+            Debug.Log("WARNING: we don't have a current dimension!!!");
+        }
         float randomDirX = Random.Range(minPos.x, maxPos.x);
         float randomDirY = Random.Range(minPos.y, maxPos.y);
         Vector3 randomPos = new Vector3(randomDirX, randomDirY);
@@ -114,7 +87,7 @@ public class CoinManager : MonoBehaviour
             {
                 Vector3 newLoc = RandomLocation(radius);
                 Debug.Log("reviving at " + newLoc);
-                actualCoin.revive(newLoc, (int)Random.Range(1, GlobalVars.Instance.numDimensions));
+                actualCoin.revive(newLoc, GlobalVars.Instance.numDimensions);
             } else if (actualCoin == null)
             {
                 Debug.Log("couldn't find any coins to revive");

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class DimensionHandler : MonoBehaviour
 {
+    public GameObject Walls;
+    public GameObject Ground;
+
+    public int Dim = 0;
+
     // Start is called before the first frame update
     void Start()
     {

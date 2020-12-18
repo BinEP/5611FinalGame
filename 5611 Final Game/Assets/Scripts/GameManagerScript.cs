@@ -11,7 +11,7 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
-        SetDimention(GlobalVars.Instance.currentDimensionIter);
+        GlobalVars.Instance.switchDim(GlobalVars.Instance.currentDimensionIter);
         Time.timeScale = 1f;
 	}
 
@@ -33,7 +33,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void Restart()
     {
-        SetDimention(GlobalVars.Instance.currentDimensionIter);
+        GlobalVars.Instance.switchDim(GlobalVars.Instance.currentDimensionIter);
 
         gameIsPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -61,54 +61,24 @@ public class GameManagerScript : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Alpha1) || Input.GetKey(KeyCode.Keypad1))
         {
-            SetDimention(1);
+            GlobalVars.Instance.switchDim(1);
         }
         else if (Input.GetKey(KeyCode.Alpha2) || Input.GetKey(KeyCode.Keypad2))
         {
-            SetDimention(2);
+            GlobalVars.Instance.switchDim(2);
         }
         else if (Input.GetKey(KeyCode.Alpha3) || Input.GetKey(KeyCode.Keypad3))
         {
-            SetDimention(3);
+            GlobalVars.Instance.switchDim(3);
         }
         else if (Input.GetKey(KeyCode.Alpha4) || Input.GetKey(KeyCode.Keypad4))
         {
-            SetDimention(4);
+            GlobalVars.Instance.switchDim(4);
         }
         else if (Input.GetKey(KeyCode.Alpha5) || Input.GetKey(KeyCode.Keypad5))
         {
-            SetDimention(5);
+            GlobalVars.Instance.switchDim(5);
         }
     }
 
-    private void SetDimention(int dim)
-    {
-        GlobalVars.Instance.currentDimensionIter = dim;
-
-        GlobalVars.Instance.Dimension1.SetActive(false);
-        GlobalVars.Instance.Dimension2.SetActive(false);
-        GlobalVars.Instance.Dimension3.SetActive(false);
-        GlobalVars.Instance.Dimension4.SetActive(false);
-        GlobalVars.Instance.Dimension5.SetActive(false);
-
-        switch (dim)
-        {
-            case 1:
-                GlobalVars.Instance.Dimension1.SetActive(true);
-                break;
-            case 2:
-                GlobalVars.Instance.Dimension2.SetActive(true);
-                break;
-            case 3:
-                GlobalVars.Instance.Dimension3.SetActive(true);
-                break;
-            case 4:
-                GlobalVars.Instance.Dimension4.SetActive(true);
-                break;
-            case 5:
-                GlobalVars.Instance.Dimension5.SetActive(true);
-                break;
-        }
-        Debug.Log("Dimension " + dim);
-    }
 }
