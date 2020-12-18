@@ -19,7 +19,7 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
-        SetDimention(GlobalVars.Instance.currentDimension);
+        SetDimention(GlobalVars.Instance.currentDimensionIter);
         Time.timeScale = 1f;
 	}
 
@@ -57,7 +57,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void Restart()
     {
-        SetDimention(GlobalVars.Instance.currentDimension);
+        SetDimention(GlobalVars.Instance.currentDimensionIter);
 
         gameIsPaused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -107,7 +107,7 @@ public class GameManagerScript : MonoBehaviour
 
     private void SetDimention(int dim)
     {
-        GlobalVars.Instance.currentDimension = dim;
+        GlobalVars.Instance.currentDimensionIter = dim;
 
         Dimension1.SetActive(false);
         Dimension2.SetActive(false);

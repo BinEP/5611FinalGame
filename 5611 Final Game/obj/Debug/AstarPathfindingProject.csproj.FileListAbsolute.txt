@@ -263,3 +263,11 @@ C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\ob
 C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\obj\Debug\AstarPathfindingProject.csproj.CopyComplete
 C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\obj\Debug\AstarPathfindingProject.dll
 C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\obj\Debug\AstarPathfindingProject.pdb
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\Google.Protobuf.dll
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\Grpc.Core.dll
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\System.Interactive.Async.dll
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\System.IO.Abstractions.dll
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\System.IO.Abstractions.TestingHelpers.dll
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\Unity.Burst.Unsafe.dll
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\Google.Protobuf.pdb
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\Temp\Bin\Debug\Unity.Burst.Unsafe.xml

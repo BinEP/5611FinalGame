@@ -5,6 +5,7 @@ using UnityEngine;
 public class CoinScript : MonoBehaviour
 {
     public Rigidbody2D rb;
+    private bool isAlive = true;
 
     void Update()
     {
@@ -24,5 +25,21 @@ public class CoinScript : MonoBehaviour
     {
         //rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
         //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
+    }
+
+    public bool IsAlive()
+    {
+        return isAlive;
+    }
+
+    public void kill()
+    {
+        isAlive = false;
+    }
+
+    public void revive(Vector3 newPos)
+    {
+        rb.MovePosition(newPos);
+        isAlive = true;
     }
 }
