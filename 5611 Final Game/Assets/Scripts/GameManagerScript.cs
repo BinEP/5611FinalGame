@@ -9,13 +9,6 @@ public class GameManagerScript : MonoBehaviour
     public GameObject EndGameMenuUI;
     public string nextLevelName;
 
-
-    public GameObject Dimension1;
-    public GameObject Dimension2;
-    public GameObject Dimension3;
-    public GameObject Dimension4;
-    public GameObject Dimension5;
-
     void Start()
     {
         SetDimention(GlobalVars.Instance.currentDimensionIter);
@@ -92,28 +85,28 @@ public class GameManagerScript : MonoBehaviour
     {
         GlobalVars.Instance.currentDimensionIter = dim;
 
-        Dimension1.SetActive(false);
-        Dimension2.SetActive(false);
-        Dimension3.SetActive(false);
-        Dimension4.SetActive(false);
-        Dimension5.SetActive(false);
+        GlobalVars.Instance.Dimension1.SetActive(false);
+        GlobalVars.Instance.Dimension2.SetActive(false);
+        GlobalVars.Instance.Dimension3.SetActive(false);
+        GlobalVars.Instance.Dimension4.SetActive(false);
+        GlobalVars.Instance.Dimension5.SetActive(false);
 
         switch (dim)
         {
             case 1:
-                Dimension1.SetActive(true);
+                GlobalVars.Instance.Dimension1.SetActive(true);
                 break;
             case 2:
-                Dimension2.SetActive(true);
+                GlobalVars.Instance.Dimension2.SetActive(true);
                 break;
             case 3:
-                Dimension3.SetActive(true);
+                GlobalVars.Instance.Dimension3.SetActive(true);
                 break;
             case 4:
-                Dimension4.SetActive(true);
+                GlobalVars.Instance.Dimension4.SetActive(true);
                 break;
             case 5:
-                Dimension5.SetActive(true);
+                GlobalVars.Instance.Dimension5.SetActive(true);
                 break;
         }
         Debug.Log("Dimension " + dim);

@@ -5,11 +5,17 @@ using UnityEngine;
 public class CoinScript : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public int dimension = 1;
     private bool isAlive = true;
     private bool reviving = false;
     private int reviveTimer = 60;
     private int currentcount = 0;
     private Vector3 nextPos = new Vector3(0.0f, 0.0f, 0.0f);
+
+    void Start()
+    {
+        dimension = (int)Random.Range(1, GlobalVars.Instance.numDimensions);
+    }
 
     void Update()
     {
@@ -52,8 +58,9 @@ public class CoinScript : MonoBehaviour
         isAlive = false;
     }
 
-    public void revive(Vector3 newPos)
+    public void revive(Vector3 newPos, int newDim)
     {
+        dimension = newDim;
         nextPos = newPos;
         reviving = true;
     }

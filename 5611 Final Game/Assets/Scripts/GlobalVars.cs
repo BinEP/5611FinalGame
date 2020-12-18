@@ -32,8 +32,13 @@ public class GlobalVars : MonoBehaviour
     public int enemyAttackValue = 50;
     public int enemyStartingHealth = 20;
 
+    public int numDimensions = 5;
     public int currentDimensionIter = 1;
-    public GameObject currentDimension;
+    public GameObject Dimension1;
+    public GameObject Dimension2;
+    public GameObject Dimension3;
+    public GameObject Dimension4;
+    public GameObject Dimension5;
 
     public EquipabbleItem equipabbleItem = null;
 
