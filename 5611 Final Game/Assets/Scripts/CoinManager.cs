@@ -64,11 +64,6 @@ public class CoinManager : MonoBehaviour
         return randomPos;
     }
 
-    public void AddNewCoin()
-    {
-
-    }
-
     void Update()
     {
         foreach (GameObject coin in coins)
@@ -77,7 +72,9 @@ public class CoinManager : MonoBehaviour
 
             if (actualCoin != null && !actualCoin.IsAlive())
             {
-                actualCoin.revive(RandomLocation(radius));
+                Vector3 newLoc = RandomLocation(radius);
+                Debug.Log("reviving at " + newLoc);
+                actualCoin.revive(newLoc);
             } else if (actualCoin == null)
             {
                 Debug.Log("couldn't find any coins to revive");
