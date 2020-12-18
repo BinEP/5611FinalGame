@@ -35,6 +35,7 @@ public class GlobalVars : MonoBehaviour
     public int numDimensions = 0;
     public int currentDimensionIter = 0;
     public GameObject Dimensions;
+    private List<DimensionHandler> dimensionHandlers;
     private DimensionHandler currentDim = null;
 
     public EquipabbleItem equipabbleItem = null;
@@ -43,6 +44,16 @@ public class GlobalVars : MonoBehaviour
     public Text coinText;
     
     public GameObject playerArea;
+
+    public void Start()
+    {
+        dimensionHandlers = new List<DimensionHandler>();
+        DimensionHandler[] dims = Dimensions.GetComponentsInChildren<DimensionHandler>();
+        foreach (DimensionHandler dim in dims)
+        {
+            dimensionHandlers.Add(dim);
+        }
+    }
 
     public float getVisibilityModifier()
     {
@@ -98,8 +109,7 @@ public class GlobalVars : MonoBehaviour
 
             if (numDimensions > 0)
             {
-                DimensionHandler[] dims = Dimensions.GetComponentsInChildren<DimensionHandler>();
-                foreach (DimensionHandler myDim in dims)
+                foreach (DimensionHandler myDim in dimensionHandlers)
                 {
                     if (myDim.Dim == newDim)
                     {
