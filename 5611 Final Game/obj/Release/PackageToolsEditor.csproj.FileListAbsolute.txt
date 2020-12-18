@@ -1,0 +1,2 @@
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\obj\Release\PackageToolsEditor.csprojAssemblyReference.cache
+C:\Users\Zicca\Documents\school\csci_5611\final\5611FinalGame\5611 Final Game\obj\Release\PackageToolsEditor.csproj.CoreCompileInputs.cache

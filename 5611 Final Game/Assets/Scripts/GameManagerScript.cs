@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerScript : MonoBehaviour
 {
     public bool gameIsPaused = false;
-    public GameObject YouLoseMenuiUI;
-    public GameObject YouWinMenuUI;
+    public GameObject EndGameMenuUI;
     public string nextLevelName;
 
 
@@ -31,28 +30,12 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    public void YouWin()
-    {
-        if (!gameIsPaused)
-        {
-            Win();
-        }
-    }
-
     void Pause()
     {
         gameIsPaused = true;
         Time.timeScale = 0f;
 
-        YouLoseMenuiUI.SetActive(true);
-    }
-
-    void Win()
-    {
-        gameIsPaused = true;
-        Time.timeScale = 0f;
-
-        YouWinMenuUI.SetActive(true);
+        EndGameMenuUI.SetActive(true);
     }
 
     public void Restart()

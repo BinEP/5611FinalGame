@@ -80,7 +80,7 @@ public class GlobalVars : MonoBehaviour
 
     public void collectCoin() {
         SoundManagerScript.playSound("coin");
-
+        totalCoins++;
     }
 
     
