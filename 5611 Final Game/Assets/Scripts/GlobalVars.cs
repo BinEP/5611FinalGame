@@ -29,7 +29,7 @@ public class GlobalVars : MonoBehaviour
     public float enemyBaseVisibility = 15f;
     public float enemyRearVisibility = 7f;
     public float enemyAttackRange = 4f;
-    public int enemyAttackValue = 50;
+    public int enemyAttackValue = 10;
     public int enemyStartingHealth = 20;
     public int currentDimension = 1;
 

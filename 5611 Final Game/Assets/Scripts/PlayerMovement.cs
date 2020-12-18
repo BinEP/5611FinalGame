@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 velocity;
     public SpriteRenderer sprite;
 
+    public Vector2 gravity = new Vector2(0.0f, 1.0f);
     void Start() {
         sprite = GetComponentInChildren<SpriteRenderer>();
+        gravity = GlobalVars.Instance.gravityDir;
     }
-    void Update()
+    void FixedUpdate()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         velocity = new Vector2(horizontal, Input.GetAxisRaw("Vertical")).normalized;
@@ -38,13 +40,16 @@ public class PlayerMovement : MonoBehaviour
             GlobalVars.Instance.gravityDir = new Vector2(0.0f, -1.0f);
            // Debug.Log("Gravity down");
         }
-    }
 
-    private void FixedUpdate()
-    {
-        rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
+        rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.fixedDeltaTime);
         rb.MovePosition(rb.position + velocity * GlobalVars.Instance.playerSpeed * Time.fixedDeltaTime);
     }
+
+    //private void FixedUpdate()
+    //{
+    //    rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
+    //    rb.MovePosition(rb.position + velocity * GlobalVars.Instance.playerSpeed * Time.fixedDeltaTime);
+    //}
 
     public void drawCard()
     {
