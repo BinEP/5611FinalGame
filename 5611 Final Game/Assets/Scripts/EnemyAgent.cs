@@ -43,26 +43,7 @@ public class EnemyAgent : Agent
             sensor.AddObservation(gravity);
 
             sensor.AddObservation(playerRigid.velocity);
-            //Tilemap tilemap = GameObject.Find("Dim1/Walls").GetComponent<Tilemap>();
-            //BoundsInt bounds = tilemap.cellBounds;
-            //TileBase[] allTiles = tilemap.GetTilesBlock(bounds);
-
-
-
-
-            //for (int x = 0; x < bounds.size.x; x++) {
-            //    for (int y = 0; y < bounds.size.y; y++) {
-            //        TileBase tile = allTiles[x + y * bounds.size.x];
-            //        if (tile != null) {
-            //            dimensionArr[x + y * bounds.size.x] = true;
-            //        } else {
-            //            dimensionArr[x + y * bounds.size.x] = false;
-            //        }
-            //    }
-            //}
-            //sensor.
-            //sensor.AddObservation(dimensionArr);.
-            //We don't care about dimension, screw it
+           //Add ray tracer collision here
         }
     }
 
@@ -71,12 +52,8 @@ public class EnemyAgent : Agent
         //rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.deltaTime);
 
         Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
-        Debug.Log("Pre: " + doThing.ToString());
         doThing.Normalize();
         doThing *= GlobalVars.Instance.enemySpeed;
-        Debug.Log("Post:" + doThing.ToString());
-        Debug.Log("Heelllooo");
-        Debug.Log("Player Pos:" + player.transform.position.ToString());
         //gameObject.transform.position += doThing * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
 
@@ -93,13 +70,6 @@ public class EnemyAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        //gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-        //gameObject.transform.Rotate(new Vector3(1, 0, 0), Random.Range(-10f, 10f));
-        //gameObject.transform.Rotate(new Vector3(0, 0, 1), Random.Range(-10f, 10f));
-        //playerRigid.velocity = new Vector3(0f, 0f, 0f);
-        //player.transform.position = new Vector3(Random.Range(-1.5f, 1.5f), 4f, Random.Range(-1.5f, 1.5f))
-        //    + gameObject.transform.position;
-        //Reset the parameters when the Agent is reset.
         SetResetParameters();
     }
 
