@@ -97,7 +97,7 @@ public class EnemyMovement : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
-
+        Debug.Log("PLEASE DONE RUN");
         rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / 2);
         direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);

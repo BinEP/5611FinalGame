@@ -72,7 +72,7 @@ public class CoinManager : MonoBehaviour
         }
         float randomDirX = Random.Range(minPos.x, maxPos.x);
         float randomDirY = Random.Range(minPos.y, maxPos.y);
-        Vector3 randomPos = new Vector3(randomDirX, randomDirY);
+        Vector3 randomPos = new Vector3(randomDirX, randomDirY, 3.0f);
 
         return randomPos;
     }
