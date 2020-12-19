@@ -77,6 +77,7 @@ public class EnemyAgent : Agent
         Debug.Log("Post:" + doThing.ToString());
         Debug.Log("Heelllooo");
         Debug.Log("Player Pos:" + player.transform.position.ToString());
+        //gameObject.transform.position += doThing * Time.fixedDeltaTime;
         rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
 
         float distanceToPlayer = (player.transform.position - gameObject.transform.position).magnitude;
