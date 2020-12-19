@@ -48,7 +48,7 @@ public class EnemyAgent : Agent
     }
 
 	public override void OnActionReceived(float[] vectorAction) {
-        Debug.Log("Action Received: " + vectorAction.ToString());
+        //Debug.Log("Action Received: " + vectorAction.ToString());
         //rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.deltaTime);
 
         Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
@@ -78,7 +78,6 @@ public class EnemyAgent : Agent
         Vector2 move = player.transform.position - gameObject.transform.position;
         actionsOut[0] = move.x;
         actionsOut[1] = move.y;
-        Debug.Log("Going: " + move.x + ", " + move.y);
 
     }
 

@@ -22,8 +22,7 @@ public class EnemyMovement : MonoBehaviour
 
     }
 
-	public void OnCollisionEnter(Collision collision) {
-        Debug.Log("Collision");
+	public void OnCollisionEnter2D(Collision2D collision) {
         if (collision.collider.gameObject.CompareTag("Player")) {
             playerInSight();
         }
