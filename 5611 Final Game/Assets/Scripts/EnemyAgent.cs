@@ -82,8 +82,8 @@ public class EnemyAgent : Agent
         }
 
         directionToStep.Normalize();
-        rb.velocity = directionToStep * GlobalVars.Instance.enemySpeed;
-        //rb.velocity = new Vector2((directionToStep * GlobalVars.Instance.enemySpeed).x, rb.velocity.y);
+        rb.velocity = directionToStep * GlobalVars.enemySpeed;
+        //rb.velocity = new Vector2((directionToStep * GlobalVars.enemySpeed).x, rb.velocity.y);
 
 
         String toPrint = "[ ";
@@ -93,12 +93,12 @@ public class EnemyAgent : Agent
         }
         Debug.Log("Action Received: " + toPrint + "]");
         //Global var for now, will be local for training
-        gravity = GlobalVars.Instance.gravityDir;
-        rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
+        gravity = GlobalVars.gravityDir;
+        rb.AddForce(GlobalVars.gravityScale * gravity);
 
         //Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
         //doThing.Normalize();
-        //doThing *= GlobalVars.Instance.enemySpeed;
+        //doThing *= GlobalVars.enemySpeed;
         //gameObject.transform.position += doThing * Time.fixedDeltaTime;
         //rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
 
@@ -133,7 +133,7 @@ public class EnemyAgent : Agent
         //Debug.Log(toPrint + "]");
         Vector2 move = player.transform.position - gameObject.transform.position;
 
-        if (Math.Abs(move.x) < 5)
+        if (Math.Abs(move.x) < 1)
         {
             actionsOut[0] = 0f;
         }
@@ -149,7 +149,7 @@ public class EnemyAgent : Agent
             }
         }
 
-        if (Math.Abs(move.y) < 5)
+        if (Math.Abs(move.y) < 1)
         {
             actionsOut[1] = 0f;
         }
@@ -208,9 +208,9 @@ public class EnemyAgent : Agent
         int xEnemy = (int)Random.Range(-45, 45);
         int yEnemy = (int)Random.Range(-15, 30);
 
-        player.transform.position = new Vector2(xPlayer, yPlayer);
+        //player.transform.position = new Vector2(xPlayer, yPlayer);
         gameObject.transform.position = new Vector3(xEnemy, yEnemy, 3.0f);
-        RandomizeGravity();
+        //RandomizeGravity();
         
 
         //playerRigid.mass = m_ResetParams.GetWithDefault("mass", 1.0f);
