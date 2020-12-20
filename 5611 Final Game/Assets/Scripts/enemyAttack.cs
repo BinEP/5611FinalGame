@@ -41,12 +41,12 @@ public class EnemyAttack : MonoBehaviour
         //selectingTarget = true;
         //SelectNewTarget();
         //InvokeRepeating("UpdatePath", 0.5f, 0.5f);
-        //health = GlobalVars.Instance.enemyStartingHealth;
+        //health = GlobalVars.enemyStartingHealth;
 
         visibilityMask = 1 << LayerMask.NameToLayer("Obstacle");
         visibilityMask += 1; // sets bitmask for "Default"
 
-        //speed = GlobalVars.Instance.enemySpeed;
+        //speed = GlobalVars.enemySpeed;
     }
 
 
@@ -100,7 +100,7 @@ public class EnemyAttack : MonoBehaviour
         //    reachedEndOfPath = false;
         //}
 
-        //rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / 2);
+        //rb.AddForce(GlobalVars.gravityScale * GlobalVars.gravityDir / 2);
         //direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         //rb.MovePosition(rb.position + direction * speed * Time.fixedDeltaTime);
 
@@ -143,7 +143,7 @@ public class EnemyAttack : MonoBehaviour
     //    currTarget = targets[targetIndex];
     //    reachedEndOfPath = false;
     //    selectingTarget = false;
-    //    speed = GlobalVars.Instance.enemySpeed;
+    //    speed = GlobalVars.enemySpeed;
 
     //    seeker.StartPath(rb.position, currTarget.position, OnPathComplete);
     //}
@@ -151,7 +151,7 @@ public class EnemyAttack : MonoBehaviour
     void playerInSight()
     {
         var dist = Vector2.Distance(transform.position, player.transform.position);
-        if (dist <= GlobalVars.Instance.enemyAttackRange)
+        if (dist <= GlobalVars.enemyAttackRange)
         {
             // attack
             if (canAttack)
@@ -165,34 +165,34 @@ public class EnemyAttack : MonoBehaviour
 
         //var angle = Vector2.Angle(direction, player.transform.position - transform.position);
 
-        //if (angle < GlobalVars.Instance.enemyVisiblityAngle)
+        //if (angle < GlobalVars.enemyVisiblityAngle)
         //{
-        //    if (dist <= GlobalVars.Instance.getEnemyVisibility())
+        //    if (dist <= GlobalVars.getEnemyVisibility())
         //    {
         //        //print(dist);
         //        // change target
-        //        speed = GlobalVars.Instance.enemyAggroSpeed;
+        //        speed = GlobalVars.enemyAggroSpeed;
         //        currTarget = player.transform;
         //        reachedEndOfPath = false;
         //        selectingTarget = false;
         //    }
         //} else
-        //    if (dist <= GlobalVars.Instance.getEnemyRearVisibility())
+        //    if (dist <= GlobalVars.getEnemyRearVisibility())
         //    {
         //        //print(dist);
         //        // change target
-        //        speed = GlobalVars.Instance.enemyAggroSpeed;
+        //        speed = GlobalVars.enemyAggroSpeed;
         //        currTarget = player.transform;
         //        reachedEndOfPath = false;
         //        selectingTarget = false;
         //    }
 
-        Debug.DrawLine(transform.position, (transform.position + Vector3.right * GlobalVars.Instance.getEnemyRearVisibility()), Color.white);
-        Debug.DrawLine(transform.position, (transform.position + Vector3.left * GlobalVars.Instance.getEnemyVisibility()), Color.green);
+        Debug.DrawLine(transform.position, (transform.position + Vector3.right * GlobalVars.getEnemyRearVisibility()), Color.white);
+        Debug.DrawLine(transform.position, (transform.position + Vector3.left * GlobalVars.getEnemyVisibility()), Color.green);
     }
 
     void attack() {
-        GlobalVars.Instance.playerHealth -= GlobalVars.Instance.enemyAttackValue;
+        GlobalVars.playerHealth -= GlobalVars.enemyAttackValue;
         Invoke("enableAttack", 1f);
     }
 

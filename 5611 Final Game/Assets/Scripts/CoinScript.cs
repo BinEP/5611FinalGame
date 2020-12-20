@@ -14,7 +14,7 @@ public class CoinScript : MonoBehaviour
 
     void Start()
     {
-        dimension = (int)Random.Range(1, GlobalVars.Instance.numDimensions);
+        dimension = (int)Random.Range(1, GlobalVars.numDimensions);
     }
 
     void Update()
@@ -36,14 +36,14 @@ public class CoinScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            GlobalVars.Instance.collectCoin();
+            GlobalVars.collectCoin();
             kill();
         }
     }
 
     private void FixedUpdate()
     {
-        //rb.AddForce(GlobalVars.Instance.gravityScale * GlobalVars.Instance.gravityDir / Time.fixedDeltaTime);
+        //rb.AddForce(GlobalVars.gravityScale * GlobalVars.gravityDir / Time.fixedDeltaTime);
         //rb.MovePosition(rb.position + rb.velocity * Time.fixedDeltaTime);
     }
 

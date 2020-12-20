@@ -31,7 +31,7 @@ public class EnemyMovement : MonoBehaviour
     void playerInSight()
     {
         var dist = Vector2.Distance(transform.position, player.transform.position);
-        if (dist <= GlobalVars.Instance.enemyAttackRange)
+        if (dist <= GlobalVars.enemyAttackRange)
         {
             // attack
             if (canAttack)
@@ -46,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void attack() {
-        GlobalVars.Instance.playerHealth -= GlobalVars.Instance.enemyAttackValue;
+        GlobalVars.playerHealth -= GlobalVars.enemyAttackValue;
         Invoke("enableAttack", 1f);
     }
 

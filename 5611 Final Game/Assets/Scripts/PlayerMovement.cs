@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Player Movement start");
         RotateStuff(0);
   //      try {
-  //          gravity = GlobalVars.Instance.gravityDir;
+  //          gravity = GlobalVars.gravityDir;
   //      } catch {
 
 		//}
@@ -65,15 +65,15 @@ public class PlayerMovement : MonoBehaviour
             // Debug.Log("Gravity down");
             RotateStuff(0);
         } else if (Input.GetKey(KeyCode.Space)) {
-            rb.AddForce(-1 * GlobalVars.Instance.playerJump * GlobalVars.Instance.gravityScale * gravity);
+            rb.AddForce(-1 * GlobalVars.playerJump * GlobalVars.gravityScale * gravity);
         }
         //Test Change
-        //GlobalVars.Instance.gravityDir = gravity;
+        //GlobalVars.gravityDir = gravity;
         Debug.Log("Gravity in update: " + gravity.ToString());
-        rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
-        Vector2 movementDir = Vector2.Perpendicular(horizontal * gravity * GlobalVars.Instance.playerSpeed);
+        rb.AddForce(GlobalVars.gravityScale * gravity);
+        Vector2 movementDir = Vector2.Perpendicular(horizontal * gravity * GlobalVars.playerSpeed);
 
-        float speedMax = GlobalVars.Instance.playerMaxFallSpeed;
+        float speedMax = GlobalVars.playerMaxFallSpeed;
         if(gravity.x == 0.0f) {
             rb.velocity = new Vector2(movementDir.x, Mathf.Clamp(rb.velocity.y, -speedMax, speedMax));
         } else {

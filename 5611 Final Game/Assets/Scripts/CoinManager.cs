@@ -36,9 +36,9 @@ public class CoinManager : MonoBehaviour
 
     private bool isLocValid(Vector3 pos)
     {
-        if (GlobalVars.Instance.getCurrentDim() != null)
+        if (GlobalVars.getCurrentDim() != null)
         {
-            Collider2D[] colliders = GlobalVars.Instance.getCurrentDim().GetComponentsInChildren<Collider2D>();
+            Collider2D[] colliders = GlobalVars.getCurrentDim().GetComponentsInChildren<Collider2D>();
             foreach (Collider2D c in colliders)
             {
                 if (pos.x < -10000000.0f || c.OverlapPoint(new Vector2(pos.x, pos.y))) return false;
@@ -56,9 +56,9 @@ public class CoinManager : MonoBehaviour
         Vector3 minPos = new Vector3(0.0f, 0.0f);
         Vector3 maxPos = new Vector3(0.0f, 0.0f);
 
-        if (GlobalVars.Instance.getCurrentDim() != null)
+        if (GlobalVars.getCurrentDim() != null)
         {
-            Collider2D[] colliders = GlobalVars.Instance.getCurrentDim().GetComponentsInChildren<Collider2D>();
+            Collider2D[] colliders = GlobalVars.getCurrentDim().GetComponentsInChildren<Collider2D>();
             foreach (Collider2D c in colliders)
             {
                 minPos = c.bounds.min;
@@ -87,13 +87,13 @@ public class CoinManager : MonoBehaviour
             {
                 Vector3 newLoc = RandomLocation(radius);
                 Debug.Log("reviving at " + newLoc);
-                actualCoin.revive(newLoc, GlobalVars.Instance.numDimensions);
+                actualCoin.revive(newLoc, GlobalVars.numDimensions);
             } else if (actualCoin == null)
             {
                 Debug.Log("couldn't find any coins to revive");
             }
 
-            if (actualCoin.dimension != GlobalVars.Instance.currentDimensionIter)
+            if (actualCoin.dimension != GlobalVars.currentDimensionIter)
             {
                 coin.SetActive(false);
             } else

@@ -8,7 +8,7 @@ public class EquipabbleItem : MonoBehaviour
 
     public static void equip()
     {
-        //GlobalVars.Instance.equipabbleItem = ??;
+        //GlobalVars.equipabbleItem = ??;
     }
 
     public void useItem()
@@ -28,7 +28,7 @@ public class EquipabbleItem : MonoBehaviour
 
     public void unequip()
     {
-        GlobalVars.Instance.equipabbleItem = null;
+        GlobalVars.equipabbleItem = null;
     }
 
     protected void activate()

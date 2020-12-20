@@ -27,9 +27,9 @@ public class EnemyAgent : Agent
         playerRigid = player.GetComponent<Rigidbody2D>();
         //rb = GetComponent<Rigidbody2D>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
-        
-        gravity = GlobalVars.Instance.gravityDir;
         SetResetParameters();
+        gravity = GlobalVars.gravityDir;
+        
 
         if (!Academy.Instance.IsCommunicatorOn) {
             this.MaxStep = 0;
@@ -40,8 +40,6 @@ public class EnemyAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        Debug.Log(gameObject.transform.position);
-        Debug.Log(sensor);
         sensor.AddObservation(gameObject.transform.position); // size 3
         sensor.AddObservation(player.transform.position - gameObject.transform.position); // size 3
         sensor.AddObservation(gravity); // size 2
@@ -63,6 +61,10 @@ public class EnemyAgent : Agent
 
         if (Random.Range(0, 101) < 2) {
             RandomizeGravity();
+        }
+
+        if (Random.Range(0, 8000) < 2) {
+            GameManagerScript.switchDim(Random.Range(1, GlobalVars.numDimensions + 1));
         }
 
         float actionHoriz = vectorAction[0];
@@ -90,9 +92,9 @@ public class EnemyAgent : Agent
         }
 
         directionToStep.Normalize();
-        Vector2 speed = directionToStep * GlobalVars.Instance.enemySpeed;
+        Vector2 speed = directionToStep * GlobalVars.enemySpeed;
         rb.velocity = speed;
-        //rb.velocity = new Vector2((directionToStep * GlobalVars.Instance.enemySpeed).x, rb.velocity.y);
+        //rb.velocity = new Vector2((directionToStep * GlobalVars.enemySpeed).x, rb.velocity.y);
 
 
         String toPrint = "[ ";
@@ -102,12 +104,12 @@ public class EnemyAgent : Agent
         }
         Debug.Log("Action Received: " + toPrint + "]");
         //Global var for now, will be local for training
-        //gravity = GlobalVars.Instance.gravityDir;
-        rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
+        //gravity = GlobalVars.gravityDir;
+        rb.AddForce(GlobalVars.gravityScale * gravity);
 
         //Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
         //doThing.Normalize();
-        //doThing *= GlobalVars.Instance.enemySpeed;
+        //doThing *= GlobalVars.enemySpeed;
         //gameObject.transform.position += doThing * Time.fixedDeltaTime;
         //rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
 
@@ -118,7 +120,18 @@ public class EnemyAgent : Agent
             SetReward(-1 * distanceToPlayer / 10);
         }
        
-        //EndEpisode();
+        if (gameObject.transform.position.x < -50 
+            || gameObject.transform.position.x > 50
+            || gameObject.transform.position.y < -20
+            || gameObject.transform.position.y > 35
+            || player.transform.position.x < -50
+            || player.transform.position.x > 50
+            || player.transform.position.y < -20
+            || player.transform.position.y > 35) {
+            
+            EndEpisode();
+        }
+        //
 
     }
 
