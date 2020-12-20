@@ -15,7 +15,8 @@ public static class GlobalVars {
     public static int playerHealth = 100;
     public static float playerSpeed = 7f;
     public static float playerMaxFallSpeed = 60f;
-    public static float playerJump = 5f;
+    public static float playerJumpScale = 25f;
+    public static bool playerIsJumping = false;
     public static int totalCoins = 0;
     public static int coinsPerDraw = 3;
     public static float playerStealth = 0f;

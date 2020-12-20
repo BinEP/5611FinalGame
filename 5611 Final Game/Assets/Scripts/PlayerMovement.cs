@@ -50,8 +50,12 @@ public class PlayerMovement : MonoBehaviour
             gravity = new Vector2(0.0f, -1.0f);
             // Debug.Log("Gravity down");
             RotateStuff(0);
-        } else if (Input.GetKey(KeyCode.Space)) {
-            rb.AddForce(-1 * GlobalVars.playerJump * GlobalVars.gravityScale * gravity);
+        } else if (Input.GetKey(KeyCode.Space) && !GlobalVars.playerIsJumping) {
+            rb.AddForce(-1 * GlobalVars.playerJumpScale * GlobalVars.gravityScale * gravity);
+            GlobalVars.playerIsJumping = true;
+        } else if (!Input.GetKey(KeyCode.Space))
+        {
+            GlobalVars.playerIsJumping = false;
         }
         //Test Change
         GlobalVars.gravityDir = gravity;
