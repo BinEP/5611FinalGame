@@ -10,11 +10,20 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 gravity = new Vector2(0.0f, -1.0f);
 
     void Start() {
+        FakeStart();
+    }
+
+    public void FakeStart() {
         sprite = GetComponentInChildren<SpriteRenderer>();
-        gravity = new Vector2(0.0f, -1.0f);
-        // Debug.Log("Gravity down");
+        //gravity = new Vector2(0.0f, -1.0f);
+        Debug.Log("Player Movement start");
         RotateStuff(0);
-        gravity = GlobalVars.Instance.gravityDir;
+  //      try {
+  //          gravity = GlobalVars.Instance.gravityDir;
+  //      } catch {
+
+		//}
+        
     }
     void Update()
     {
@@ -23,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+		Debug.Log("Fixed Update");
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         velocity = new Vector2(horizontal, Input.GetAxisRaw("Vertical")).normalized;
@@ -58,8 +68,8 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(-1 * GlobalVars.Instance.playerJump * GlobalVars.Instance.gravityScale * gravity);
         }
         //Test Change
-        GlobalVars.Instance.gravityDir = gravity;
-
+        //GlobalVars.Instance.gravityDir = gravity;
+        Debug.Log("Gravity in update: " + gravity.ToString());
         rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
         Vector2 movementDir = Vector2.Perpendicular(horizontal * gravity * GlobalVars.Instance.playerSpeed);
 
@@ -73,19 +83,19 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    public void SetGravity(Vector2 newGravity, float angle) {
+        gravity = new Vector2(newGravity.x, newGravity.y);
+        Debug.Log("Gravity: " + gravity.ToString());
+        RotateStuff(angle);
+	}
+
     private void RotateStuff(float rotation) {
         sprite.transform.eulerAngles = new Vector3(
             sprite.transform.eulerAngles.x,
             sprite.transform.eulerAngles.y,
             rotation
         );
-
-       
     }
-
-    public void ChangeGravity() {
-
-	}
 
     public void drawCard()
     {

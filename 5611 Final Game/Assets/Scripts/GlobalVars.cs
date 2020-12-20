@@ -49,6 +49,11 @@ public class GlobalVars : MonoBehaviour
 
     public void Start()
     {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
         dimensionHandlers = new List<DimensionHandler>();
         DimensionHandler[] dims = Dimensions.GetComponentsInChildren<DimensionHandler>();
         foreach (DimensionHandler dim in dims)
@@ -83,6 +88,14 @@ public class GlobalVars : MonoBehaviour
             _instance = this;
         }
        
+    }
+
+    public void init() {
+        if (_instance != null && _instance != this) {
+            Destroy(this.gameObject);
+        } else {
+            _instance = this;
+        }
     }
 
     void Update() {

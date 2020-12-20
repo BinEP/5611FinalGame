@@ -9,22 +9,26 @@ using UnityEngine.Tilemaps;
 public class EnemyAgent : Agent
 {
     [Header("Enemy Agents")]
-    GameObject player;
+    public GameObject player;
     [Tooltip("Whether to use vector observation. This option should be checked " +
         "in 3DBall scene, and unchecked in Visual3DBall scene. ")]
-    public bool useVecObs;
     Rigidbody2D playerRigid;
-    Rigidbody2D rb;
+    public Rigidbody2D rb;
     EnvironmentParameters m_ResetParams;
     Vector2 gravity;
     //bool[] dimensionArr;
 
     public override void Initialize()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
+
+        //Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity, transform.parent);
+        player.GetComponent<PlayerMovement>().FakeStart();
         playerRigid = player.GetComponent<Rigidbody2D>();
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
         m_ResetParams = Academy.Instance.EnvironmentParameters;
+        
+        gravity = GlobalVars.Instance.gravityDir;
         SetResetParameters();
 
         if (!Academy.Instance.IsCommunicatorOn) {
@@ -36,8 +40,6 @@ public class EnemyAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        if (useVecObs)
-        {
             sensor.AddObservation(gameObject.transform.position); // size 3
             sensor.AddObservation(player.transform.position - gameObject.transform.position); // size 3
             sensor.AddObservation(gravity); // size 2
@@ -47,7 +49,7 @@ public class EnemyAgent : Agent
             //total size of observation space = 3 + 3 + 2 + 2 = 10
 
            //Add ray tracer collision here
-        }
+        
     }
 
     /// <summary>
@@ -56,6 +58,10 @@ public class EnemyAgent : Agent
     /// and where [1] dictates vertical movement with (0) being no movement, (1) being down, and (2) being up
     /// </summary>
 	public override void OnActionReceived(float[] vectorAction) {
+
+        if (Random.Range(0, 101) < 2) {
+            RandomizeGravity();
+        }
 
         float actionHoriz = vectorAction[0];
         float actionVert = vectorAction[1];
@@ -82,7 +88,8 @@ public class EnemyAgent : Agent
         }
 
         directionToStep.Normalize();
-        rb.velocity = directionToStep * GlobalVars.Instance.enemySpeed;
+        Vector2 speed = directionToStep * GlobalVars.Instance.enemySpeed;
+        rb.velocity = speed;
         //rb.velocity = new Vector2((directionToStep * GlobalVars.Instance.enemySpeed).x, rb.velocity.y);
 
 
@@ -93,7 +100,7 @@ public class EnemyAgent : Agent
         }
         Debug.Log("Action Received: " + toPrint + "]");
         //Global var for now, will be local for training
-        gravity = GlobalVars.Instance.gravityDir;
+        //gravity = GlobalVars.Instance.gravityDir;
         rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
 
         //Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
@@ -170,25 +177,30 @@ public class EnemyAgent : Agent
     }
 
     public void RandomizeGravity() {
-
+        Debug.Log("Randomizing Gravity");
         Vector2 grav = new Vector2(0, -1);
         int rand = Random.Range(0, 4);
+        float angle = 0;
 
         if (rand < 1) {
             grav = new Vector2(-1.0f, 0.0f);
+            
             //Debug.Log("Gravity right");
+            angle = 270;
         } else if (rand < 2) {
             grav = new Vector2(1.0f, 0.0f);
             // Debug.Log("Gravity left");
+            angle = 90;
         } else if (rand < 3) {
             grav = new Vector2(0.0f, 1.0f);
             //Debug.Log("Gravity up");
+            angle = 180;
         } else if (rand < 4) {
             grav = new Vector2(0.0f, -1.0f);
             // Debug.Log("Gravity down");
+            angle = 0;
         }
-
-        player.GetComponent<PlayerMovement>().gravity = grav;
+        player.GetComponent<PlayerMovement>().SetGravity(grav, angle);
         gravity = grav;
     }
 
@@ -196,8 +208,8 @@ public class EnemyAgent : Agent
     public void SetStarting()
     {
         //Set the attributes of the ball by fetching the information from the academy
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerRigid = player.GetComponent<Rigidbody2D>();
+        //player = GameObject.FindGameObjectWithTag("Player");
+        
         //x: -45 to 45
         //y: -15 to 30
         int xPlayer = (int)Random.Range(-45, 45);
