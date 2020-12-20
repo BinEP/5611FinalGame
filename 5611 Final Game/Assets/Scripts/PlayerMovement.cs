@@ -39,13 +39,17 @@ public class PlayerMovement : MonoBehaviour
         } else if (Input.GetKey(KeyCode.DownArrow)) {
             gravity = new Vector2(0.0f, -1.0f);
            // Debug.Log("Gravity down");
+        } else if (Input.GetKey(KeyCode.Space))
+        {
+            rb.AddForce(-10 * GlobalVars.Instance.gravityScale * gravity);
         }
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.fixedDeltaTime);
-        rb.MovePosition(rb.position + velocity * GlobalVars.Instance.playerSpeed * Time.fixedDeltaTime);
+        gravity = GlobalVars.Instance.gravityDir;
+        rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
+        rb.velocity = velocity * GlobalVars.Instance.playerSpeed;
     }
 
     public void drawCard()

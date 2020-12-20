@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DrawButton
+  - Walls
   layers:
   - Default
   - TransparentFX

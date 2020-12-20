@@ -38,24 +38,67 @@ public class EnemyAgent : Agent
     {
         if (useVecObs)
         {
-            sensor.AddObservation(gameObject.transform.position);
-            sensor.AddObservation(player.transform.position - gameObject.transform.position);
-            sensor.AddObservation(gravity);
+            sensor.AddObservation(gameObject.transform.position); // size 3
+            sensor.AddObservation(player.transform.position - gameObject.transform.position); // size 3
+            sensor.AddObservation(gravity); // size 2
 
-            sensor.AddObservation(playerRigid.velocity);
+            sensor.AddObservation(playerRigid.velocity); // size 2
+
+            //total size of observation space = 3 + 3 + 2 + 2 = 10
+
            //Add ray tracer collision here
         }
     }
 
+    /// <summary>
+    /// Perform actions based on a vector of numbers
+    /// Where [0] dictates horizontal movement with (0) being no movement, (1) being left, and (2) being right
+    /// and where [1] dictates vertical movement with (0) being no movement, (1) being down, and (2) being up
+    /// </summary>
 	public override void OnActionReceived(float[] vectorAction) {
-        //Debug.Log("Action Received: " + vectorAction.ToString());
-        //rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.deltaTime);
 
-        Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
-        doThing.Normalize();
-        doThing *= GlobalVars.Instance.enemySpeed;
+        float actionHoriz = vectorAction[0];
+        float actionVert = vectorAction[1];
+
+        Vector2 directionToStep = new Vector2(0f, 0f);
+        //step left
+        if (actionHoriz == 2f)
+        {
+            directionToStep += new Vector2(1f, 0f);
+        }
+        //step right
+        else if (actionHoriz == 1f)
+        {
+            directionToStep += new Vector2(-1f, 0f);
+        }            //step left
+        if (actionVert == 2f)
+        {
+            directionToStep += new Vector2(0f, 1f);
+        }
+        //step right
+        else if (actionVert == 1f)
+        {
+            directionToStep += new Vector2(0f, -1f);
+        }
+
+        directionToStep.Normalize();
+        //rb.MovePosition(rb.position + directionToStep * GlobalVars.Instance.enemySpeed * Time.fixedDeltaTime);
+        rb.velocity = directionToStep * GlobalVars.Instance.enemySpeed;
+
+        String toPrint = "[ ";
+        foreach (float f in vectorAction)
+        {
+            toPrint += f.ToString() + " ";
+        }
+        Debug.Log("Action Received: " + toPrint + "]");
+        
+        //rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.fixedDeltaTime);
+
+        //Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
+        //doThing.Normalize();
+        //doThing *= GlobalVars.Instance.enemySpeed;
         //gameObject.transform.position += doThing * Time.fixedDeltaTime;
-        rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
+        //rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
 
         float distanceToPlayer = (player.transform.position - gameObject.transform.position).magnitude;
         if (distanceToPlayer < 10) {
@@ -73,11 +116,54 @@ public class EnemyAgent : Agent
         SetResetParameters();
     }
 
+    /// <summary>
+    /// actionsOut has the structure of vectorAction in OnActionReceived
+    /// Where [0] dictates horizontal movement with (0) being no movement, (1) being left, and (2) being right
+    /// and where [1] dictates vertical movement with (0) being no movement, (1) being down, and (2) being up
+    /// </summary>
 	public override void Heuristic(float[] actionsOut) {
-       
+
+        //String toPrint = "[ ";
+        //foreach (float f in actionsOut)
+        //{
+        //    toPrint += f.ToString() + " ";
+        //}
+        //Debug.Log(toPrint + "]");
         Vector2 move = player.transform.position - gameObject.transform.position;
-        actionsOut[0] = move.x;
-        actionsOut[1] = move.y;
+
+        if (Math.Abs(move.x) < 5)
+        {
+            actionsOut[0] = 0f;
+        }
+        else
+        {
+            if (move.x > 0)
+            {
+                actionsOut[0] = 2f;
+            }
+            else
+            {
+                actionsOut[0] = 1f;
+            }
+        }
+
+        if (Math.Abs(move.y) < 5)
+        {
+            actionsOut[1] = 0f;
+        }
+        else
+        {
+            if (move.y > 0)
+            {
+                actionsOut[1] = 2f;
+            }
+            else
+            {
+                actionsOut[1] = 1f;
+            }
+        }
+
+        
 
     }
 
