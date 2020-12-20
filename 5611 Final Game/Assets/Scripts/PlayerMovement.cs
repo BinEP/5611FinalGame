@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         } else if (Input.GetKey(KeyCode.Space)) {
             rb.AddForce(-1 * GlobalVars.Instance.playerJump * GlobalVars.Instance.gravityScale * gravity);
         }
+        //Test Change
         GlobalVars.Instance.gravityDir = gravity;
 
         rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
