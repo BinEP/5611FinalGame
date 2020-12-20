@@ -17,6 +17,9 @@ public class GameManagerScript : MonoBehaviour
 
     public GameObject Dimensions;
     public GameObject firstDimension;
+    private List<DimensionHandler> dimensionHandlers = new List<DimensionHandler>();
+
+    public GameObject enemy;
 
     private bool firstTime = true;
 
@@ -25,7 +28,14 @@ public class GameManagerScript : MonoBehaviour
         GlobalVars.Dimensions = Dimensions;
         GlobalVars.currentDim = firstDimension.GetComponent<DimensionHandler>();
 
-        switchDim(GlobalVars.currentDimensionIter);
+        DimensionHandler[] tempDims = Dimensions.GetComponentsInChildren<DimensionHandler>();
+        foreach (DimensionHandler myDim in tempDims)
+        {
+            dimensionHandlers.Add(myDim);
+        }
+
+
+            switchDim(GlobalVars.currentDimensionIter);
         if (GlobalVars.startTheWorld)
         {
             Pause(false);
@@ -120,6 +130,13 @@ public class GameManagerScript : MonoBehaviour
         {
             YouLose();
         }
+
+        float toCompare = GlobalVars.totalCoins / 5.0f;
+        if (toCompare > GlobalVars.numEnemies)
+        {
+            Instantiate(enemy);
+            GlobalVars.numEnemies++;
+        }
     }
 
     public void switchDim(int newDim)
@@ -135,7 +152,6 @@ public class GameManagerScript : MonoBehaviour
 
             if (GlobalVars.numDimensions > 0)
             {
-                DimensionHandler[] dimensionHandlers = Dimensions.GetComponentsInChildren<DimensionHandler>();
                 foreach (DimensionHandler myDim in dimensionHandlers)
                 {
                     if (myDim.Dim == newDim)

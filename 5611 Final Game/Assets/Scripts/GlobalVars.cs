@@ -20,6 +20,7 @@ public static class GlobalVars {
     public static int coinsPerDraw = 3;
     public static float playerStealth = 0f;
 
+    public static int numEnemies = 0;
     public static float enemySpeed = 5f;
     public static float enemyAggroSpeed = 10.0f;
     public static float enemyVisiblityAngle = 45f;

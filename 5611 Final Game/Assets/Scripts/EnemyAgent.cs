@@ -164,9 +164,7 @@ public class EnemyAgent : Agent
                 actionsOut[1] = 1f;
             }
         }
-
         
-
     }
 
     public void RandomizeGravity() {
