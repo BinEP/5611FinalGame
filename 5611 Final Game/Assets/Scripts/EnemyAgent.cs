@@ -63,7 +63,7 @@ public class EnemyAgent : Agent
             RandomizeGravity();
         }
 
-        if (Random.Range(0, 8000) < 2) {
+        if (Random.Range(0, 50000) < 2) {
             GameManagerScript.switchDim(Random.Range(1, GlobalVars.numDimensions + 1));
         }
 
@@ -114,12 +114,13 @@ public class EnemyAgent : Agent
         //rb.MovePosition(rb.position + doThing * Time.fixedDeltaTime);
 
         float distanceToPlayer = (player.transform.position - gameObject.transform.position).magnitude;
+        
         if (distanceToPlayer < 10) {
-            SetReward(1f);
-        } else {
-            SetReward(-1 * distanceToPlayer / 10);
+            SetReward(10.0f / distanceToPlayer);
+		} else {
+            SetReward((float)Math.Exp(-1 * distanceToPlayer / 100));
         }
-       
+
         if (gameObject.transform.position.x < -50 
             || gameObject.transform.position.x > 50
             || gameObject.transform.position.y < -20

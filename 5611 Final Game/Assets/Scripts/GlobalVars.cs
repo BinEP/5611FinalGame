@@ -31,7 +31,7 @@ public static class GlobalVars
     public static float enemyBaseVisibility = 15f;
     public static float enemyRearVisibility = 7f;
     public static float enemyAttackRange = 4f;
-    public static int enemyAttackValue = 5;
+    public static int enemyAttackValue = 0;
     public static int enemyStartingHealth = 20;
 
     public static int numDimensions = 5;
