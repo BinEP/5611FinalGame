@@ -19,6 +19,8 @@ public class GlobalVars : MonoBehaviour
 
     public int playerHealth = 100;
     public float playerSpeed = 7f;
+    public float playerMaxFallSpeed = 60f;
+    public float playerJump = 5f;
     public int totalCoins = 0;
     public int coinsPerDraw = 3;
     public float playerStealth = 0f;

@@ -82,8 +82,9 @@ public class EnemyAgent : Agent
         }
 
         directionToStep.Normalize();
-        //rb.MovePosition(rb.position + directionToStep * GlobalVars.Instance.enemySpeed * Time.fixedDeltaTime);
         rb.velocity = directionToStep * GlobalVars.Instance.enemySpeed;
+        //rb.velocity = new Vector2((directionToStep * GlobalVars.Instance.enemySpeed).x, rb.velocity.y);
+
 
         String toPrint = "[ ";
         foreach (float f in vectorAction)
@@ -91,8 +92,9 @@ public class EnemyAgent : Agent
             toPrint += f.ToString() + " ";
         }
         Debug.Log("Action Received: " + toPrint + "]");
-        
-        //rb.AddForce(GlobalVars.Instance.gravityScale * gravity / Time.fixedDeltaTime);
+        //Global var for now, will be local for training
+        gravity = GlobalVars.Instance.gravityDir;
+        rb.AddForce(GlobalVars.Instance.gravityScale * gravity);
 
         //Vector2 doThing = new Vector2(vectorAction[0], vectorAction[1]);
         //doThing.Normalize();
