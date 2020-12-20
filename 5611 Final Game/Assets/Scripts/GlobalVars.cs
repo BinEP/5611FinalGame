@@ -87,7 +87,7 @@ public class GlobalVars : MonoBehaviour
 
     void Update() {
         healthText.text = "Health: " + playerHealth.ToString();
-        coinText.text = "Coins: " + totalCoins.ToString();
+        coinText.text = "Features: " + totalCoins.ToString();
         if (playerHealth <= 0) {
             FindObjectOfType<GameManagerScript>().YouLose();
         }

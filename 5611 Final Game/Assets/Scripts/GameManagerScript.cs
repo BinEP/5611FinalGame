@@ -7,13 +7,19 @@ public class GameManagerScript : MonoBehaviour
 {
     public bool gameIsPaused = false;
     public GameObject EndGameMenuUI;
+    public GameObject StartScreenUI;
     public string nextLevelName;
+
+    private bool firstTime = true;
 
     void Start()
     {
         GlobalVars.Instance.switchDim(GlobalVars.Instance.currentDimensionIter);
         Time.timeScale = 1f;
-	}
+        gameIsPaused = true;
+        Time.timeScale = 0f;
+        StartScreenUI.SetActive(true);
+    }
 
     public void YouLose()
     {
@@ -31,8 +37,16 @@ public class GameManagerScript : MonoBehaviour
         EndGameMenuUI.SetActive(true);
     }
 
+    public void beginTheGame()
+    {
+        StartScreenUI.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+    }
+
     public void Restart()
     {
+
         GlobalVars.Instance.switchDim(GlobalVars.Instance.currentDimensionIter);
 
         gameIsPaused = false;
