@@ -60,7 +60,7 @@ public class EnemyAgent : Agent
         float actionHoriz = vectorAction[0];
         float actionVert = vectorAction[1];
 
-        Vector2 directionToStep = new Vector2(0f, 0f);
+		Vector2 directionToStep = new Vector2(0f, 0f);
         //step left
         if (actionHoriz == 2f)
         {
@@ -196,7 +196,8 @@ public class EnemyAgent : Agent
     public void SetStarting()
     {
         //Set the attributes of the ball by fetching the information from the academy
-
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerRigid = player.GetComponent<Rigidbody2D>();
         //x: -45 to 45
         //y: -15 to 30
         int xPlayer = (int)Random.Range(-45, 45);

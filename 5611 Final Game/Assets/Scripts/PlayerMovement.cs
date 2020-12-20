@@ -7,10 +7,13 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     Vector2 velocity;
     public SpriteRenderer sprite;
-    public Vector2 gravity = new Vector2(0.0f, 1.0f);
+    public Vector2 gravity = new Vector2(0.0f, -1.0f);
 
     void Start() {
         sprite = GetComponentInChildren<SpriteRenderer>();
+        gravity = new Vector2(0.0f, -1.0f);
+        // Debug.Log("Gravity down");
+        RotateStuff(0);
         gravity = GlobalVars.Instance.gravityDir;
     }
     void Update()
@@ -79,6 +82,10 @@ public class PlayerMovement : MonoBehaviour
 
        
     }
+
+    public void ChangeGravity() {
+
+	}
 
     public void drawCard()
     {
