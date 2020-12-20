@@ -21,7 +21,7 @@ public class EnemyAgent : Agent
     public override void Initialize()
     {
         //player = GameObject.FindGameObjectWithTag("Player");
-
+        this.MaxStep = 500;
         //Instantiate(player, new Vector3(0, 0, 0), Quaternion.identity, transform.parent);
         player.GetComponent<PlayerMovement>().FakeStart();
         playerRigid = player.GetComponent<Rigidbody2D>();
@@ -63,7 +63,7 @@ public class EnemyAgent : Agent
             RandomizeGravity();
         }
 
-        if (Random.Range(0, 50000) < 2) {
+        if (Random.Range(0, 10000) < 2) {
             GameManagerScript.switchDim(Random.Range(1, GlobalVars.numDimensions + 1));
         }
 
@@ -115,11 +115,11 @@ public class EnemyAgent : Agent
 
         float distanceToPlayer = (player.transform.position - gameObject.transform.position).magnitude;
         
-        if (distanceToPlayer < 10) {
-            SetReward(10.0f / distanceToPlayer);
-		} else {
-            SetReward((float)Math.Exp(-1 * distanceToPlayer / 100));
-        }
+        //if (distanceToPlayer < 10) {
+           //SetReward(10.0f / distanceToPlayer);
+		//} else {
+            SetReward(100.0f * (float)Math.Exp(-1 * distanceToPlayer / 100));
+        //}
 
         if (gameObject.transform.position.x < -50 
             || gameObject.transform.position.x > 50
