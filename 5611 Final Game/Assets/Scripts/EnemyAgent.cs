@@ -40,15 +40,17 @@ public class EnemyAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-            sensor.AddObservation(gameObject.transform.position); // size 3
-            sensor.AddObservation(player.transform.position - gameObject.transform.position); // size 3
-            sensor.AddObservation(gravity); // size 2
+        Debug.Log(gameObject.transform.position);
+        Debug.Log(sensor);
+        sensor.AddObservation(gameObject.transform.position); // size 3
+        sensor.AddObservation(player.transform.position - gameObject.transform.position); // size 3
+        sensor.AddObservation(gravity); // size 2
 
-            sensor.AddObservation(playerRigid.velocity); // size 2
+        sensor.AddObservation(playerRigid.velocity); // size 2
 
-            //total size of observation space = 3 + 3 + 2 + 2 = 10
+        //total size of observation space = 3 + 3 + 2 + 2 = 10
 
-           //Add ray tracer collision here
+        //Add ray tracer collision here
         
     }
 
