@@ -130,13 +130,6 @@ public class GameManagerScript : MonoBehaviour
         {
             YouLose();
         }
-
-        float toCompare = GlobalVars.totalCoins / 5.0f;
-        if (toCompare > GlobalVars.numEnemies)
-        {
-            Instantiate(enemy);
-            GlobalVars.numEnemies++;
-        }
     }
 
     public void switchDim(int newDim)
